@@ -53,17 +53,23 @@
 1.**主事件循环**:
 - 使用 boost::asio::io_context 创建一个事件循环 (ioc)，用于处理异步事件。
 - 通过设置并发提示为 1 来确保服务器是单线程的。
+  
 2.**共享状态**:
 - 创建一个 shared_state 对象 (st)，其中包含所有连接共享的单例对象。
 - shared_state 包括文档根目录 (doc_root) 和 Redis 客户端。
+  
 3.**监听端点**:
 - 使用 boost::asio::ip::tcp::endpoint 创建一个服务器监听的物理端点 (listening_endpoint)。
+  
 4.**信号处理**:
 - 使用 boost::asio::signal_set 拦截 SIGINT 和 SIGTERM 信号，以实现优雅的退出。
+  
 5.**Redis 客户端**:
 - 启动 Redis 连接 (st->redis().start_run())，用于处理与 Redis 的通信。
+  
 6.**HTTP 监听器**:
 - 启动 HTTP 监听器 (launch_http_listener) 来处理传入的 HTTP 连接。
+  
 
 #### **模块分析**：
 1.**主事件循环 (ioc.run())**:
